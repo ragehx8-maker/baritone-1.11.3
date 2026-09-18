@@ -246,7 +246,7 @@ public class SettingsUtil {
         ),
         ITEM(
                 Item.class,
-                str -> BuiltInRegistries.ITEM.get(ResourceLocation.parse(str.trim())), // TODO this now returns AIR on failure instead of null, is that an issue?
+                str -> BuiltInRegistries.ITEM.getValue(ResourceLocation.parse(str.trim())),
                 item -> BuiltInRegistries.ITEM.getKey(item).toString()
         ),
         LIST() {
@@ -348,4 +348,4 @@ public class SettingsUtil {
                     .findFirst().orElse(null);
         }
     }
-}
+        }
