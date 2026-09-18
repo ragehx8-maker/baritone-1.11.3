@@ -11,7 +11,7 @@
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU Lesser General Public License for more details.
  *
- * You should have received a copy of the GNU Lesser General Public License
+ * You should have received a data of the GNU Lesser General Public License
  * along with Baritone.  If not, see <https://www.gnu.org/licenses/>.
  */
 
@@ -31,8 +31,8 @@ public enum ItemById implements IDatatypeFor<Item> {
     @Override
     public Item get(IDatatypeContext ctx) throws CommandException {
         ResourceLocation id = ResourceLocation.parse(ctx.getConsumer().getString());
-        Item item;
-        if ((item = BuiltInRegistries.ITEM.getOptional(id).orElse(null)) == null) {
+        Item item = BuiltInRegistries.ITEM.get(id);
+        if (item == null) {
             throw new IllegalArgumentException("No item found by that id");
         }
         return item;
@@ -51,3 +51,6 @@ public enum ItemById implements IDatatypeFor<Item> {
                 .stream();
     }
 }
+```[cite: 9]
+
+Aap isko apne project mein replace karke save kar do. Agar koi aur file ya error bachi ho toh batana!
