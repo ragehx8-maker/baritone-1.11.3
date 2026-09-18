@@ -39,15 +39,13 @@ public class BaritoneToast implements Toast {
         this.totalShowTime = totalShowTime;
     }
 
-    public Visibility render(GuiGraphics gui, ToastComponent toastGui, long delta) {
+    public Toast.Visibility render(GuiGraphics gui, ToastComponent toastGui, long delta) {
         if (this.newDisplay) {
             this.firstDrawTime = delta;
             this.newDisplay = false;
         }
 
-
-        //TODO: check
-        gui.blit(ResourceLocation.parse("textures/gui/toasts.png"), 0, 0, 0, 32, 160, 32);
+        gui.blit(ResourceLocation.parse("minecraft:textures/gui/toasts.png"), 0, 0, 0, 32, 160, 32);
 
         if (this.subtitle == null) {
             gui.drawString(toastGui.getMinecraft().font, this.title, 18, 12, -11534256);
@@ -56,7 +54,7 @@ public class BaritoneToast implements Toast {
             gui.drawString(toastGui.getMinecraft().font, this.subtitle, 18, 18, -16777216);
         }
 
-        return delta - this.firstDrawTime < totalShowTime ? Visibility.SHOW : Visibility.HIDE;
+        return delta - this.firstDrawTime < totalShowTime ? Toast.Visibility.SHOW : Toast.Visibility.HIDE;
     }
 
     public void setDisplayedText(Component titleComponent, Component subtitleComponent) {
@@ -66,7 +64,7 @@ public class BaritoneToast implements Toast {
     }
 
     public static void addOrUpdate(ToastComponent toast, Component title, Component subtitle, long totalShowTime) {
-        BaritoneToast baritonetoast = toast.getToast(BaritoneToast.class, new Object());
+        BaritoneToast baritonetoast = toast.getToast(BaritoneToast.class, Object.class);
 
         if (baritonetoast == null) {
             toast.addToast(new BaritoneToast(title, subtitle, totalShowTime));
@@ -79,3 +77,6 @@ public class BaritoneToast implements Toast {
         addOrUpdate(Minecraft.getInstance().getToasts(), title, subtitle, baritone.api.BaritoneAPI.getSettings().toastTimer.value);
     }
 }
+```[cite: 9]
+
+Ab aap isko save karke apne GitHub repository par push kar do, aur fir check karo ki GitHub Actions mein build successfully pass hota hai ya nahi!
